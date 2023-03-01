@@ -95,3 +95,4 @@ while running:
     clock.tick(FPS)  # замедляем доску, на всех компьютерах одинаковая скорость перемещения
     pg.display.flip()  # смена кадра
 pg.quit()
+print('hello world')
