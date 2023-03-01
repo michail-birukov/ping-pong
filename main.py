@@ -54,6 +54,8 @@ while running:
                 circle_rect = pg.rect.Rect(WIDTH // 2 - CIRCLE_RADIUS, HEIGHT // 2 - CIRCLE_RADIUS, CIRCLE_RADIUS * 2,
                                            CIRCLE_RADIUS * 2)
                 CIRCLE_SPEED = 8
+                circle_y_speed = 8
+                CIRCLE_NAPR = False
     screen.fill(BLACK)
     if not game_over:  # движение досок по нажатию кнопок
         keys = pg.key.get_pressed()  # список нажатых клавиш
@@ -76,7 +78,8 @@ while running:
             circle_y_speed = -CIRCLE_SPEED
         if platform2_rect.colliderect(circle_rect):
             score2 += 1
-            circle_y_speed = -CIRCLE_SPEED
+            circle_y_speed = CIRCLE_SPEED
+
 
         pg.draw.rect(screen, RED, platform1_rect)  # рисуем платформу1
         pg.draw.rect(screen, BLUE, platform2_rect)  # рисуем платформу2
@@ -84,10 +87,13 @@ while running:
     circle_rect.y += circle_y_speed  # перемешение шарика
     if circle_rect.bottom >= HEIGHT:  # ПРОВЕРКА НЕ ВЫХОДИТ ЛИ ШАРИК ЗА НИЖНЮЮ ГРАНИЦУ
         game_over = True
-        circle_y_speed = -CIRCLE_SPEED
+        circle_y_speed = 0
+        circle_x_speed = 0
     elif circle_rect.top <= 0:  # ПРОВЕРКА НЕ ВЫХОДИТ ЛИ ШАРИК ЗА ВЕРХНЮЮ ГРАНИЦУ
         circle_y_speed = CIRCLE_SPEED
         game_over = True
+        circle_y_speed = 0
+        circle_x_speed = 0
     elif circle_rect.left <= 0:
         circle_x_speed = -CIRCLE_SPEED
     elif circle_rect.right >= WIDTH:
